@@ -1,0 +1,64 @@
+Searching a Graph
+. checking if a network is connected
+. driving directions
+. formulating a plan -- eg, how to fill in a sudoku puzzle
+. compute the "pieces" or "components" of a graph
+
+
+How to Search a Graph
+. Goals: 1) given a vertex as a starting point, find everything
+  findable from that vertex -- ie, that can be found from starting point
+ -- generally, everything that's connected
+ -- if directed graph, everything that works direction-wise too
+ 2) don't explore anything twice
+
+Outline of generic search algorithm
+. divide nodes into unexplored and explored
+. have a boolean per node to indicate explored/unexplored
+  while possible:
+    choose an edge (u,v) with u explored and v unexplored -- if none, halt
+    mark v explored
+    get your edges that cross the 'frontier' and pick one of them
+
+How to Choose Among the Many Possible "Frontier" Edges
+. frontier edges -- those who have one end explored and one end unexplored
+
+Breadth-First Search ( BFS )
+. explore nodes in layers -- s is layer 0, explore all adjacent nodes of s first (layer 1), then 
+  the adjacent nodes of those nodes (layer 2), etc.
+. O(m+n) time -- n = number of nodes, m = number of edges
+. Algorithm:
+
+BFS(Graph G, vertex s):
+ mark s as explored
+ let Q = queue data structure (FIFO), intialized with s
+ while Q != 0 (not empty):
+   remove the first node of Q, call it v
+   for each edge (v,w):
+     if w eunexplored
+     mark w as explored
+     add w to Q    
+
+Application: Shortest Paths ( only breadth-first )
+. add extra code to algorithm
+ -- estimate distance from s to v:
+   if v==s: dist(v) = 0
+ -- s's distance is 0; set dist(each subsequent vertex)
+    1 + the distance of the vertex that discovered it
+ -- nodes in each layer should have same distance
+
+BFS(Graph G, vertex s):
+ mark s as explored
+ let Q = queue data structure (FIFO), intialized with s
+ while Q != 0 (not empty):
+   remove the first node of Q, call it v
+   for each edge (v,w):
+     if w eunexplored
+     mark w as explored
+     add w to Q  
+
+
+Depth-First Search ( DFS )
+. explore aggressively like a maze, backtrack only when necessary
+
+
