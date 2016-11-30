@@ -47,6 +47,15 @@ Application: Shortest Paths ( only breadth-first )
     1 + the distance of the vertex that discovered it
  -- nodes in each layer should have same distance
 
+Application: Finding Connected Components via BFS
+Algorithm (O(m+n) time):
+ mark all nodes unexplored ( assume labeled 1 to n )
+ for i=1 to n (note: i in each iteration can be completely unconnected to previous/subsequent
+               values of i)
+   if i not explored:
+    BFS(G,i) (note: this will, of course, only traverse connected points, unlike the for loop)
+
+
 BFS(Graph G, vertex s):
  mark s as explored
  let Q = queue data structure (FIFO), intialized with s
@@ -58,7 +67,16 @@ BFS(Graph G, vertex s):
      add w to Q  
 
 
-Depth-First Search ( DFS )
-. explore aggressively like a maze, backtrack only when necessary
+Depth-First Search ( DFS ) -- also O(n+m) time
+. explore aggressively like a maze, backtracking when necessary
+. algorithm:
+ -- use stack instead of queue, otherwise very similar to breadth-first
+ -- can be recursive instead of iterative
+
+DFS(Graph G, start vertex s)
+  mark s as explored
+  for every edge(s,v):
+    if v unexplored:
+      DFS(G,v)
 
 
