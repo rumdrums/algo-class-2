@@ -112,7 +112,7 @@ Strongly Connected Components
  -- can be computed in linear time -- O(m+n)
  -- VERY simplistic
  -- algorithm:
-
+#####################
 SCC(G):
   G^rev = G with all arcs (arcs are just edges) reversed
   DFS-Loop(G^rev) # Goal: Compute "magical ordering" of nodes
@@ -144,9 +144,17 @@ DFS(graph G, node i) # again
   t ++
   set f(i) := t
 
+#####################
 
-   
-
-
+Why does Kosaraju's algorithm work?
+. observation: the SCCs of a directed graph correspond to nodes in an acyclic "meta-graph"
+  -- ie, if you 'zoom out' when looking at a directed graph and think of each SCC 
+     as an individual node in a graph, that meta-graph is necessarily acyclic (if not,
+     the SCCs would not be distinct)
+. lemma: considering two adjacent SCCs, c1 and c2 with connected nodes i and j
+  -- let f(v) = finishing times of DFS-Loop in G^rev
+  lemma: max(f(v) for c2) > max(f(v) for c1)
+. corollary: 
+  -- maximum f-value of G must lie in a "sink SCC" (recognize that largest f-value is where we start 2nd pass)
 
 
