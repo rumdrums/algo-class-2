@@ -79,4 +79,74 @@ DFS(Graph G, start vertex s)
     if v unexplored:
       DFS(G,v)
 
+Topological Ordering
+. gives you a numeric ordering for the vertices in directed graphs
+. eg, with 4 vertices, you can label them 1,2,3,4 -- F(s)
+. must be acyclic, no cycles in the verticies
+  -- as long as no cycles, a topological ordering does exist
+. DFS allows you to calculate these
+
+Algorithm for Topological Ordering with DFS
+. running time: O(m+n)
+ -- all edges and nodes are looked at only once
+. basically, you start with the last node, which should be a "sink
+  vertex", number that one, then remove it, consider the next-to-last
+  node(s), which are now the sink vertex, label it, and move on
+
+DFS-Loop(graph G)
+  mark all nodes unexplored
+  current_label = n # to keep track of ordering
+  for each vertex v:
+    if v not yet explored:
+      DFS(G, v)
+  F(s) = current_label
+  current_label--
+
+Strongly Connected Components
+. regions of a graph where you can get from anywhere 
+  to anywhere else in the region
+. depending on where you initiate the search, you might
+  find an individual SCC, or the entire graph
+. DFS is best for this
+. Kosaraju's Two-Pass Algorithm
+ -- can be computed in linear time -- O(m+n)
+ -- VERY simplistic
+ -- algorithm:
+
+SCC(G):
+  G^rev = G with all arcs (arcs are just edges) reversed
+  DFS-Loop(G^rev) # Goal: Compute "magical ordering" of nodes
+    let f(v) = "finishing time" of each v
+    Assume nodes labelled 1 to n
+    ### G^rev is G with the directions of arcs reversed
+  DFS-Loop(G) (or just run DFS-Loop) # Goal: discover the SCCs one by one
+    process results in decreasing order of finishing times
+    ### here nodes are re-labled with their finishing times
+    ### all nodes get associated with their "leader" vertex
+      ### and these all end up being in a SCC
+. at end, you get number of SCCs
+. running time = 2 x DFS = O(m+n)
+ 
+DFS-Loop(Graph g) # (again, modified)
+  global variable t = 0 # keep track of how many nodes we've finished exploring
+  global variable s = NULL # keep track of most recent vertex from which DFS was initiated ( for leaders in 2nd pass )
+  for i = n down to 1:
+    if i not yet explored:
+      s := i
+      DFS(G, i)
+
+DFS(graph G, node i) # again
+  mark i as explored
+  set leader(i) = node s
+  for each arc (i, j) in G:
+    if j not yet explored:
+      DFS(G, j)
+  t ++
+  set f(i) := t
+
+
+   
+
+
+
 
