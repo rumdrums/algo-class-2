@@ -167,3 +167,21 @@ Why does Kosaraju's algorithm work?
   -- maximum f-value of G must lie in a "sink SCC" (recognize that largest f-value is where we start 2nd pass)
 
 
+Web Graph
+. what does graph of www look like?
+. even assuming you've already crawled it, it's huge and difficult to comprehend
+. ~ year 2000: 200 million nodes, 1 billion edges
+. today:
+ -- good: tools like map-reduce
+ -- bad: even bigger
+. "bow tie" picture of web
+  -- giant SCC in middle, the 'core' of the web
+  -- 'in' and 'out' regions on sides -- sites that connect to core, but from which you can't get out
+    -- 'out' sites include corporate web sites
+    -- 'in' sites include new web pages
+    -- 'tendrils' and 'tubes'
+. 'small world' property aka 'six degrees' property
+  -- ie, it takes a lot fewer hops than you might expect to get from anywhere to anywhere
+. book: 'networks, crowds, and markets'
+
+
