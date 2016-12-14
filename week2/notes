@@ -1,0 +1,41 @@
+Dijkstra's Algorithm
+. finding the shortest path between two nodes in a graph
+. assumptions:
+ -- there is a directed path from s to v
+  (bfs or dfs can be used beforehand to verify this)
+ -- no negative edge lengths
+. why another shortest-path algorithm?
+ -- BFS can solve shortest-path, but only if every edge length is 1
+    -- ie, can't consider potential relative differences in lengths
+       between edges themselves
+
+Dijkstra's Shortest Path Algorithm Pseudo Code
+. note: if all edge lengths are 1, this is effectively just BFS
+  -- a generalization of breadth-first search
+
+Initialization:
+  X = [S] -- vertices processed so far
+  A[s] = 0 -- array of lengths, initialized with length from s to itself (0);
+              at end of algorithm, array A will be populated
+              with correct shortest-path distances for each vertex
+  B[s]  -- computed shortest paths; not included in actual
+           implementation, but useful for understanding
+
+while X != V: (V is collection of all unexplored vertices)
+   - start with vertices whose tail is amongst vertices you've
+  already seen and whose head is unexplored vertex
+   - to pick, choose the one that minimizes:
+     A[v] + l_vw
+     # v is explored vertex
+     # w is unexplored vertex
+     -- so, basically, pick the shortest path of all edges
+        that lead out of v into unexplored
+     -- call the edge [v*, w*]
+     -- 'Dijkstra's greedy criterion'
+     
+ - X.append(w*)
+ - set A[w*] = A[v*] + l_v*w* ### (pretty basic)
+ - set B[w*] = B[v*] .... ?
+
+
+

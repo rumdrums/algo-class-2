@@ -34,3 +34,15 @@ language and environment, and we strongly
 suggest that you exchange tips for doing this on 
 the discussion forums.
 
+
+#####################################
+
+load all arcs into tuple pairs
+
+need hash map or something to keep track of explored
+
+subroutines:
+. reverse 
+. DFS-Loop
+. DFS
+

@@ -113,6 +113,7 @@ Strongly Connected Components
  -- VERY simplistic
  -- algorithm:
 #####################
+
 SCC(G):
   G^rev = G with all arcs (arcs are just edges) reversed
   DFS-Loop(G^rev) # Goal: Compute "magical ordering" of nodes
@@ -129,7 +130,13 @@ SCC(G):
  
 DFS-Loop(Graph g) # (again, modified)
   global variable t = 0 # keep track of how many nodes we've finished exploring
-  global variable s = NULL # keep track of most recent vertex from which DFS was initiated ( for leaders in 2nd pass )
+                        # NOTE: Only needed in 1st pass
+  global variable s = NULL # keep track of most recent vertex 
+                           # from which DFS was initiated 
+                           # ( for leaders in 2nd pass )
+                           # NOTE: Only needed in 2nd pass
+  ? global array of booleans to keep track of explored/unexplored
+  ? global array to keep track of finishing times of each node
   for i = n down to 1:
     if i not yet explored:
       s := i
@@ -142,8 +149,10 @@ DFS(graph G, node i) # again
     if j not yet explored:
       DFS(G, j)
   t ++
-  set f(i) := t
+  set finishing time of i (aka f(i)) := t
 
+to get size of SCCs, get number of occurrences of
+particular leader
 #####################
 
 Why does Kosaraju's algorithm work?
