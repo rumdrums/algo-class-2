@@ -21,7 +21,8 @@ Initialization:
   B[s]  -- computed shortest paths; not included in actual
            implementation, but useful for understanding
 
-while X != V: (V is collection of all unexplored vertices)
+while V: (V is collection of all unexplored vertices)
+  # n-1 total iterations
    - start with vertices whose tail is amongst vertices you've
   already seen and whose head is unexplored vertex
    - to pick, choose the one that minimizes:
@@ -36,6 +37,45 @@ while X != V: (V is collection of all unexplored vertices)
  - X.append(w*)
  - set A[w*] = A[v*] + l_v*w* ### (pretty basic)
  - set B[w*] = B[v*] .... ?
+
+Real Implementations of Dijkstra's Algorithm
+. naive implementation is O(mn)
+ -- we CAN do better, using a heap data structure
+
+Heaps
+. allow you to perform Insert, Extract-Min in O(log n) time
+. semi-sorted:
+ -- at every node, key <= children's keys
+. height of heap = log_2(n)
+
+Invariant 1: elements in heap = vertices of (V-X)
+Invariant 2: key[v] = smallest Dijkstra greedy score of an edge with v in x
+ -- so basically, a two-step process for finding the shortest path to w*:
+    1) get all vertices in (V-X)
+    2) of all of those are the head of an edge that has a tail in X,
+       choose the one with the lowest score, set this to A[v*]
+. to do step 2:
+  -- when w is moved to x, we need to recalculate all vertices in (V-X)) who 
+     have w as a tail, since they are now in the 'frontier', given that w is
+     now in X
+  -- for our given vertex v (which is the head of an edge coming from w, now in X),
+     we only need to check if the edge coming from w is lower than its previous score;
+     if it is, change its key to that; if not, don't do anything
+for each edge (w,v):
+  if v is in (V-X): ### not sure why this is required -- isn't that a given?
+    delete v from heap
+    recompute k[v] = min(key[v], A[w] + l_wv) ### just the Dijkstra greedy score 
+    re-insert v into heap
+
+Calculating running time:
+. all work can be calculated in terms of heap operations
+  -- each is O(log n)
+. extra mins (n-1)
+.... blah blah blah
+. running time = O(m log n)
+ ( much better than naive implementation )
+
+
 
 
 
