@@ -1,0 +1,49 @@
+Data Structures
+. eg, lists, stacks, queues, heaps, search trees, hash tables,
+  bloom filters, union-find
+. different structures support different sets of
+  operations
+. fewer operations a structure supports, the faster the operations
+  will be, and the smaller amount of memory required
+
+Heaps
+. operations:
+  -- insertion -- add a new object
+     -- O(log n)
+  -- extract min -- remove an object in heap with a minimum key value 
+     ( ties are broken arbitrarily ); there can also be extract max 
+     operations, but not in same heap
+     -- O(log n)
+ -- heapify -- initialize a heap with a BATCH of
+    objects in linear time
+ -- delete (O(log n))
+. container for objects that have keys;
+  keys can be compared to one another
+. canonical uses:
+  -- your program is doing repetitive minimum computations
+     using brute-force search --> SORTING!
+
+Heap Sort
+1) insert all n array elements into a heap
+2) Extract-min to pluck out elements in sorted order
+  -- O(n log n)
+  -- optimal for a comparison-based sorting algorithm
+  -- not quite as good as quicksort
+
+Applications of Heaps
+. "Priority queues" for Event Managers
+ -- time stamp is the key
+ -- extract-min yields the next scheduled event
+. "Median maintenance"
+ -- given a sequence of numbers, find median
+    of subsets of the list (eg, median of first 2, median of first 3, median of first 4,
+    etc)
+ -- use 2 heaps
+  -- smallest half of numbers in first heap
+  -- largest half in second heap
+  -- median is either largest of first, smallest of 2nd, or both
+  -- periodically may have to move items between
+     heaps to maintain balance
+. Dijkstra
+
+
