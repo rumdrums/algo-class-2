@@ -46,4 +46,26 @@ Applications of Heaps
      heaps to maintain balance
 . Dijkstra
 
+Implementation of Heaps
+. best thought of as binary trees,
+  but best implemented as __array__
+ -- just go through the heap starting at level 0,
+    left to right, adding items to array
+ -- parent node of element i is:
+     i/2 if i is even
+     floor(i/2) if i is odd
+ -- children of i:
+    2i, 2i+1
 
+. Insert -- done in logarithmic_2 time
+ 1) make the new key you're inserting the last leaf at the last level
+ 2) "Bubble" up until heap property is restored
+
+. Extract-Min -- done in logarithmic_2 time
+ 1) "extract" root and delete it
+ 2) Move LAST LEAF to be new root -- this will likely result in lots
+    of heap violations, so...
+ 3) Iteratively "Bubble Down" so that we again meet criterion that
+    all keys are <= their children
+    -- Bubble down as needed by replacing the root with the SMALLER
+       of its children
