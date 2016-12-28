@@ -69,3 +69,33 @@ Implementation of Heaps
     all keys are <= their children
     -- Bubble down as needed by replacing the root with the SMALLER
        of its children
+
+Balanced Search Trees
+ -- act like a sorted array, with fast operations for inserts and deletes
+ -- needed for dynamic data structures -- if data static, just use sorted array
+. SEARCH: O(log n)
+. SELECT: O(log n)
+. MIN/MAX: O(log n)
+. PRED/SUCC (PREDECESSSOR/SUCCESSOR): O(log n)
+. OUTPUT IN SORTED ORDER: O(n)
+. RANK: O(log n)
+. INSERT: O(log n)
+. DELETE: O(log n)
+
+Structure of a search tree
+. Assume 3 pointers -- 1 to parent, 1 to left/right child each, may be null
+. SEARCH TREE PROPERTY
+ -- if node x has a key value, all keys in left subtree < x, all keys in right subtree > x
+ -- there can be duplicate keys, just need convention for how handle 'ties'
+ -- helps with fast SEARCHING, which is the whole point
+. many possible trees for a given set of keys
+ -- Height, then, can vary from ideal case of height = log_2n to height = n-1 (single node in each level)
+. to search:
+  -- start at root, recurse left or right if desired key is larger or smaller;
+     return pointer, may be null
+. to insert:
+  -- do a search, which will fail (assuming no duplicates); set
+     the null pointer to desired value
+
+
+
