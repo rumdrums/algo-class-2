@@ -96,6 +96,41 @@ Structure of a search tree
 . to insert:
   -- do a search, which will fail (assuming no duplicates); set
      the null pointer to desired value
+. worst-case running time of search:
+ -- O(height) -- b/c unbalanced trees are possible
 
+Operations;
+. Minimum:
+ -- start at root, keep visiting left pointers until last key found
+. Predecessor: (of key k)
+ -- if k's left subtree nonempty, return max key in left subtree
+ -- if left subtree empty, follow parent pointers until you get to something smaller, which is the predecessor
+ -- flip left and right in above 2 points to get successor
+ -- worst case running time is O(height)
+. In-order traversal: (print out keys in increasing order)
+ -- let r = root, with left and right subtrees T_L and T_R
+ 1) recurse on T_L
+ 2) print out r
+ 3) recurse on T_R
+  -- n recursive calls, each prints one node -- O(n)
+. Deletion (node k):
+ -- if no children, just delete node k
+ -- if k has one child: replace k with its child
+ -- if k has two children:
+   -- compute k's predecessor, l (go left, then take first right and keep going until no more right nodes)
+   -- swap k and l
+   -- delete k (which will be a case with one or no children)
+ -- worst-case running time: O(height) again
 
-
+. Augment your data structure -- for each node, add some additional info
+  -- eg, add size field, number of tree nodes in subtree rooted at a given node
+  -- note -- you have to keep this data up-to-date as tree changes
+    -- eg, with insertion or deletion, you have to go back up the tree to increment/decrement size
+. Select: (give me the i'th smallest value)
+ -- depends on size of subtrees, which is why you would augment with that property
+ -- let a = number of nodes in left subtree (0 if none)
+ -- if i <= a, recurse on left subtree to find i'th element
+ -- if i == a+1, it's x, do that
+ -- if i > a+1, recurse on right tree
+ -- running time: O(height)
+. Rank: (how many nodes are less than i)
