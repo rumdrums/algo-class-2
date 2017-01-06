@@ -134,3 +134,18 @@ Operations;
  -- if i > a+1, recurse on right tree
  -- running time: O(height)
 . Rank: (how many nodes are less than i)
+
+Balanced Search Trees
+. maintain balanced treesm thus guaranteeing logarithmic, rather than linear, height
+. different approaches to maintaining the height
+ -- e.g., red/black
+ -- all have different 'invariants' involved in maintaining the height
+
+Red/Black Invariants
+1) each node stores one extra bit of info -- red/black node indicator
+2) Root is black
+3) no 2 reds in a row -- e.g., a red node's children / parents must be black
+4) every path from root to a null pointer (ie, an unsuccessful search) must
+   traverse the same number of black nodes
+. every red/black tree with n nodes has height <= 2log_2(n+1)
+
