@@ -149,3 +149,36 @@ Red/Black Invariants
    traverse the same number of black nodes
 . every red/black tree with n nodes has height <= 2log_2(n+1)
 
+Rotations
+. common to all balanced search trees, method of re-balancing search tree
+. left and right rotations
+ -- invoked on parent/child
+ -- O(1) time
+. left:
+  -- given parent x and right child y, goal is to invert relationship between x and y
+
+Insertion in a Red/Black Tree
+. proceed as in normal binary search tree, then either:
+ a) recolor, or 
+ b) perform rotations until invariants are restored
+
+1) insert x as normal
+2) try coloring red
+ -- less likely to break things than adding new black, which may result in more global issue
+ -- if x's parent y is black, done
+ -- else y is red, so it follows that y's parent w is black
+    case 1:
+   -- assuming w's other child is red
+   -- color w red, and z and y black; this swap doesn't break 4th invariant
+   -- but what if w's parent is also red?
+     -- double-red problem is propagated upward, because height of tree is finite, we 
+        have a logarithmic number of operations, worst case, to fix it
+     -- but what if top node has to be colored red?
+       -- simple: just re-color it black, may change number of black nodes for each path, but will do so for all equally,
+          so invariant 4 maintained
+    case 2:
+  -- w's other child is NULL or black
+  -- 2-3 rotations + recolorings required .... 
+
+
+ 
