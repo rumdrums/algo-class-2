@@ -1,0 +1,21 @@
+Hash tables
+. like arrays
+ -- immediate random access
+ -- ... except, your indexes aren't integers
+. maintain a possibly evolving set of stuff
+. aka a dictionary
+ -- but does NOT maintain a predictable ordering
+. Operations
+ -- insert
+ -- delete
+ -- lookup
+ *** guarantee: all done in constant time
+. caveats:
+ 1) properly implemented
+ 2) data not pathological
+. interesting history tidbit: hash tables first devised building compilers in 1950s; needed 
+quick way to look up symbols and determine whether previously defined or not
+. application: remembering (and looking up) previous steps
+ -- i.e., memoization
+
+
