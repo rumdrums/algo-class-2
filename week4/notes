@@ -9,7 +9,7 @@ Hash tables
  -- insert
  -- delete
  -- lookup
- *** guarantee: all done in constant time
+ *** guarantee: all done in constant O(1) time
 . caveats:
  1) properly implemented
  2) data not pathological
@@ -18,4 +18,46 @@ quick way to look up symbols and determine whether previously defined or not
 . application: remembering (and looking up) previous steps
  -- i.e., memoization
 
+Implementation
+. Setup: identify the 'universe' u of possible things that could be in your dataset
+ -- could be huge -- eg, 2^32 IP addresses in router
+. Goal is to maintain evolving set s <= u
+
+Naive Solutions
+. A simple array would allow constant time access, but space
+  requirements proportional to universe
+. Use a list -- size can be proportional to s, 
+  but list traversal is still proportional to length of list
+
+Better Solution:
+. an array about 2x size of s
+ -- each entry in array is a 'bucket'
+. assume set size s doesn't fluctuate too much, but you
+  can do things like double size of array when s starts
+  to get too big -- not important for understanding implementation
+  though
+
+Hash function
+. takes a desired key and maps it to position in array
+ -- input a key, output position in array
+. hash function tells us in what position we should store
+  the item
+
+Collisions
+. what if hash function gives us same output
+  for different inputs?
+ -- ie, only takes 23 people in a room before you're 50% likely
+    to have 2 people with same birth date
+. effectively a compression function, in that it takes the universe of
+  u and maps it to much smaller set
+. solution #1: each 'bucket' in array is a list on which you perform
+  insert, update, delete as needed
+. solution #2: 'open addressing'
+  -- only one object per bucket
+  -- hash 'sequence'
+  -- if first choice is collision, call function again, this gives you 'additive',
+     you keep adding this number to bucket choice
+    -- e.g., if 17 is first, then 23, you try 40, then 63, then 86, etc.
+  -- con: deletion is trickier
+. solution #3: implement both, see which performs better
 
