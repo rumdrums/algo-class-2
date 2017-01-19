@@ -61,3 +61,46 @@ Collisions
   -- con: deletion is trickier
 . solution #3: implement both, see which performs better
 
+Good Hash Functions
+. data should be spread out amongst buckets
+ -- ideally, completely random
+. hash function itself should have good performance
+ -- constant time
+. should be easy to store -- e.g., constant space used regardless of n
+
+Bad Hash Functions
+. example: 
+ phone numbers -- u = 10^10
+ say you expect 500 numbers to store
+ set n = 1000
+ you need a function that will take any input
+    and spit out a number between 0 and 999
+. terrible hash function would use area code as return value of hash function
+ -- almost all numbers would be in just a few buckets
+. mediocre hash function:
+ -- last 3 digits of x
+ -- not as bad as area code, but likely to be patterns involved here as well
+ -- in other words: not random
+
+. another example:
+ using memory locations as keys
+ problem is that all memory address will be powers of 2,
+ and your number of buckets, 1000, is divisible by 2
+ so your hash function using modulus would literally be unable to return odd
+ numbers, so half your buckets in your table would ALWAYS be empty
+
+Quick and Dirty Hash Functions
+. step 1: convert any non-integers to integers
+. step 2: compression function
+ -- example, mod n
+  -- use modulus based on number of buckets
+. your number of buckets n should be unrelated to your data
+ -- eg, if you use modulus to compress, and your modulus number
+    is divisible by 3 and all your data is divisible by 3, everything
+    will go in one bucket
+. choose PRIME numbers for n
+ -- choose one within constant factor of # of objects
+ -- PRIME should not be close to patterns in your data
+  -- eg, prime should not be too close to a power of 2 if all of your
+     data is a power of 2
+
