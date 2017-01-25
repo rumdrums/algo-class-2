@@ -50,14 +50,18 @@ Collisions
     to have 2 people with same birth date
 . effectively a compression function, in that it takes the universe of
   u and maps it to much smaller set
-. solution #1: each 'bucket' in array is a list on which you perform
-  insert, update, delete as needed
+. solution #1: "Chaining"
+   -- each 'bucket' in array is a list on which you perform
+   -- insert, update, delete as needed
 . solution #2: 'open addressing'
   -- only one object per bucket
   -- hash 'sequence'
-  -- if first choice is collision, call function again, this gives you 'additive',
-     you keep adding this number to bucket choice
-    -- e.g., if 17 is first, then 23, you try 40, then 63, then 86, etc.
+  -- if first choice is collision, two options:
+     1) call function again, this gives you 'additive',
+        you keep adding this number to bucket choice
+        -- e.g., if 17 is first, then 23, you try 40, then 63, then 86, etc.
+     2) increment by one each time you hit a collision until you find a free
+        bucket
   -- con: deletion is trickier
 . solution #3: implement both, see which performs better
 
@@ -103,4 +107,32 @@ Quick and Dirty Hash Functions
  -- PRIME should not be close to patterns in your data
   -- eg, prime should not be too close to a power of 2 if all of your
      data is a power of 2
+
+Load of a Hash Table
+. alpha = # of objects in hash table / # buckets in hash table
+ -- more objects in table grows load
+ -- more buckets with fixed amount of data drops load
+ -- load factors > 1 -- only chaining is option
+. constant time lookups require load <= 1
+ -- *** ideally well under 1, else performance will degrade
+. need a good hash function
+ -- unfortunately, perfect hash function does not exist
+ -- every hash function has a pathological dataset
+ -- why? b/c of nature of compression that hash functions implement
+
+Pathological Data and Hash Functions
+. *** Different -- with previous algorithms studied in class, input didn't matter
+  -- not so with hash functions
+  -- denial of service implications of badly designed hash functions
+
+Solutions for bad hash functions
+. crypto hash functions
+ -- even cryptographic hash functions -- eg SHA-2 -- have pathological datasets,
+    they're just infeasible to reverse engineer
+. randomization:
+ --  have a FAMILY of available hash functions, but randomly choose one;
+     similar to quicksort ON-AVERAGE guarantee; this prevents your app
+     from being vulnerable to any one pathology
+
+
 
