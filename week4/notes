@@ -134,5 +134,11 @@ Solutions for bad hash functions
      similar to quicksort ON-AVERAGE guarantee; this prevents your app
      from being vulnerable to any one pathology
 
-
+Universal Hash Functions
+. H is set of hash functions
+. H is universal iff:
+  for all pairs x,y in u, the Pr(x,y collide) <= 1/n
+  when h is chosen at random from H
+. e.g., probability of collision should be as small as probability that x and y
+  assigned to same bucket purely at random
 
