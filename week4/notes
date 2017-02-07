@@ -142,3 +142,33 @@ Universal Hash Functions
 . e.g., probability of collision should be as small as probability that x and y
   assigned to same bucket purely at random
 
+Bloom Filters
+. Fast inserts and fast lookups
+. Pros:
+ -- more space efficient than hash tables
+. Cons:
+ -- can't store objects
+ -- no deletions
+ -- small false positive probability
+   -- eg, chance of thinking that an ip address you haven't stored is listed as being stored
+. Applications
+ -- early spell checkers
+ -- canonical: list of forbidden passwords
+ -- modern: network router software
+   -- limited memory, need to be super-fast
+
+Bloom Filter Implementation
+. Array of n bits
+ -- if S is number of objects in dataset,
+   n/S is number of bits per object in dataset
+   imagine using 8 bits to store ip address instead of 32
+. k hash functions
+
+Bloom Filter Insertion and Lookup
+. Insertion:
+ -- data run through all k hash functions; the k bits indicated by the hash functions are all set to 1
+. Lookup:
+  -- data run through all k hash functions; if all k bits indicated by hash functions are set to 1, return True
+  -- *** chance of false positive b/c collisions, or combinations of other insertions, could have set the k bits to 1
+     previously
+
